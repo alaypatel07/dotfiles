@@ -1,0 +1,46 @@
+export PATH=/usr/local/sbin:$PATH
+
+# Setting PATH for Python 2.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+export PATH=$PATH:/Users/alay/Documents/OpenSource/Golang/bin
+export GOPATH="/Users/alay/Documents/OpenSource/Golang"
+export rnd=ece792@152.14.83.158
+export ln='ssh -Y ece792@152.14.83.156'
+export as='ssh -i "$HOME/Documents/NCSU/Amazon/Pem/First.pem" ubuntu@ec2-13-58-159-86.us-east-2.compute.amazonaws.com'
+export amey='ssh -i "$HOME/Documents/NCSU/Amazon/Pem/Amey1.pem" ubuntu@ec2-18-217-44-185.us-east-2.compute.amazonaws.com'
+export exam="ssh -Y ece792@152.14.83.151"
+
+##
+# Your previous /Users/alay/.bash_profile file was backed up as /Users/alay/.bash_profile.macports-saved_2018-06-01_at_21:23:42
+##
+
+# MacPorts Installer addition on 2018-06-01_at_21:23:42: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+m="ssh root@172.16.80.165"
+n1="ssh root@172.16.80.166"
+n2="ssh root@172.16.80.167"
+export PATH=$PATH:~/bin
+. /usr/local/etc/profile.d/bash_completion.sh
+
+
+source <(kubectl completion bash)
+alias k=kubectl
+alias ks=kubectx
+source <(kubectl completion bash | sed 's/kubectl/k/g')
+source <(cat ~/.ks-completion | sed 's/kubectx/ks/g')
+export PATH=$PATH:/usr/local/kubebuilder/bin
+export PATH="/usr/local/bin/:$PATH"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+alias c=clear
+alias f=fzf
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+bind -x '"\C-p": vim $(fzf);'
+
