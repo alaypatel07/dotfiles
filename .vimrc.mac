@@ -12,9 +12,12 @@ endif
 
 " Plugins
 call plug#begin('~/.vim/plugged')
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'k0kubun/vim-open-github'
-Plug 'nsf/gocode'
+"Plug 'vim-scripts/AutoComplPop'
+"Plug 'nsf/gocode'
+Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -56,7 +59,7 @@ set showmatch                   " Turn on completing braces
 set matchtime=3                 " speed up matching completing braces
 set backspace=indent,eol,start  " Allow backspacing over everything in insert mode.
 set winwidth=120                " Minimum number of columns for current window
-set list listchars=tab:¬\       " Show hidden characters
+" set list listchars=tab:¬\       " Show hidden characters
 set expandtab                   " Tabs will be inserted with spaces
 set shiftwidth=4                " Default tabbing wiih be 4 spaces
 set softtabstop=4               " Default tab stop will be 4 spaces"
@@ -104,6 +107,7 @@ map <leader><leader> :NERDTreeToggle<CR>
 " Map Ctrl-d to exit the file
 map <C-x> :wq!<cr>
 imap <C-x> <esc>:wq!<cr>
+
 " Map Ctrl-e to exit the file
 map <C-e> :q!<cr>
 imap <C-e> <esc>:q!<cr>
@@ -127,6 +131,8 @@ vnoremap <Space> zf Autocommands
 
 " NERDtree command for changing tabs
 map  <C-c> :tabnew<CR>
+
+au filetype go inoremap <buffer> <C-n> <C-x><C-o>
 
 if has("autocmd")
     " Enable file type detection.
@@ -163,7 +169,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 foldlevelstart=4
 
 " Nerd git plugin setup
 let g:NERDTreeIndicatorMapCustom = {
@@ -180,3 +186,38 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 set winminwidth=25
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:go_fmt_experimental=1
+
+function! Smart_TabComplete()
+  let line = getline('.')                         " current line
+
+  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
+                                                  " line to one character right
+                                                  " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+set completeopt=longest,menuone
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
