@@ -22,7 +22,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kopischke/vim-fetch'
 Plug 'Raimondi/delimitMate'
@@ -39,6 +40,7 @@ Plug 'isobit/vim-darcula-colors', {'as': 'darcula'}
 Plug 'scrooloose/nerdtree'
 Plug 'tomtom/tcomment_vim'
 Plug 'Townk/vim-autoclose'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 call plug#end()
 
 
@@ -172,7 +174,7 @@ let g:go_highlight_function_calls = 1
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 foldlevelstart=4
 
 " Nerd git plugin setup
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
