@@ -1,0 +1,103 @@
+// Place your key bindings in this file to override the defaults
+[
+    // ----------------------------------//
+    //             Navigation             //
+    // ----------------------------------//
+    // ---- Navigation History ----
+    // move the cursor back in navigation history
+    {
+        "key": "cmd+[",
+        "command": "-editor.action.outdentLines"
+    },
+    {
+        "key": "cmd+[",
+        "command": "workbench.action.navigateBack"
+    },
+    // move the cursor forward in navigation history
+    {
+        "key": "cmd+]",
+        "command": "-editor.action.indentLines"
+    },
+    {
+        "key": "cmd+]",
+        "command": "workbench.action.navigateForward"
+    },
+    // ---- Go To / Declaration / Implementation ----
+    // Go to Declaration / Definition (Cmd + B)
+    {
+        "key": "cmd+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+b",
+        "command": "editor.action.revealDefinition",
+        "when": "editorTextFocus"
+    },
+    // Go to Implementation(s) (Cmd + Option + B)
+    {
+        "key": "cmd+alt+b",
+        "command": "editor.action.goToImplementation",
+        "when": "editorTextFocus"
+    },
+    // Go to Definition with Mouse (Cmd + Click)
+    // Already default in VS Code; uses same command as Cmd + B
+    // Settings to mimic IntelliJ behavior:
+    // "editor.gotoLocation.multiple": "peek"
+    // "editor.multiCursorModifier": "ctrlCmd"
+    // ----------------------------------//
+    //        Indentation / Formatting   //
+    // ----------------------------------//
+    // indent inside
+    {
+        "key": "tab",
+        "command": "editor.action.indentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // outdent outside
+    {
+        "key": "shift+tab",
+        "command": "editor.action.outdentLines",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // reformat code
+    {
+        "key": "cmd+alt+l",
+        "command": "editor.action.formatDocument",
+        "when": "editorHasDocumentFormattingProvider && editorTextFocus"
+    },
+    // ----------------------------------//
+    //        Window Management          //
+    // ----------------------------------//
+    // project explorer
+    {
+        "key": "cmd+1",
+        "command": "workbench.view.explorer",
+        "when": "!explorerViewletVisible"
+    },
+    {
+        "key": "cmd+1",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "explorerViewletVisible"
+    },
+    // run/debug
+    {
+        "key": "cmd+4",
+        "command": "workbench.view.debug",
+        "when": "!debugViewletVisible"
+    },
+    {
+        "key": "cmd+4",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "debugViewletVisible"
+    },
+    // hide active panel
+    {
+        "key": "shift+esc",
+        "command": "workbench.action.closePanel"
+    },
+    // hide all panels (IntelliJ-style)
+    {
+        "key": "cmd+shift+f12",
+        "command": "workbench.action.closePanel"
+    },
+]
